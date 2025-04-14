@@ -1,0 +1,22 @@
+@import '/src/assets/mixins/mixins.scss';
+
+.container {
+  border-radius: 8px;
+  width: 100%;
+  background: #000000;
+  margin: 0px 32px;
+  padding: 0px 8px;
+
+  &_list {
+    @include flexContainer($direction: column);
+
+    li {
+      border-bottom: 1.5px solid #FFFFFF8C;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
+  

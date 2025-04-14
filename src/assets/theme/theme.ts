@@ -6,9 +6,6 @@ declare module '@mui/material/styles' {
       white: string
       black: string
     }
-    gradient: {
-      gradient6: string[]
-    }
     status: {
       green: string
       red: string
@@ -23,9 +20,6 @@ declare module '@mui/material/styles' {
     accent?: {
       white: string
       black: string
-    }
-    gradient?: {
-      gradient6: string[]
     }
     status?: {
       green: string
@@ -44,13 +38,10 @@ export const theme: Theme = createTheme({
       white: '#FFFFFF',
       black: '#000000',
     },
-    gradient: {
-      gradient6: ['#A5AAEE', '#FF9F63'],
-    },
     status: {
       green: '#58A55D',
       red: '#E6588B',
-      warning: '#FF9F63',
+      warning: '#E49137',
     },
     backgroundCustom: {
       grey: '#141414',
@@ -73,7 +64,7 @@ export const theme: Theme = createTheme({
     },
     caption: {
       fontSize: '0.75rem',
-      fontWeight: 400,
+      fontWeight: 800,
       lineHeight: '166%',
       letterSpacing: '0.4px',
       color: '#FFFFFF',

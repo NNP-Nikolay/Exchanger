@@ -1,0 +1,18 @@
+@import '/src/assets/mixins/mixins.scss';
+
+.container {
+  @include flexContainer($justify: space-between);
+  padding: 10px 16px;
+  width: 100%;
+  background: #000000;
+  cursor: pointer;
+
+  &_aboutCurrency {
+    @include flexContainer($align: center);
+    gap: 16px;
+
+    &_infoText {
+      @include flexContainer($direction: column);
+    }
+  }
+}
