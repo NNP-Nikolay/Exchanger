@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material'
 import { FC } from 'react'
 
-import styles from './CurrencyCard.module.scss'
+import styles from './ExchangeRateCard.module.scss'
 
-const CurrencyCard: FC = () => {
+const ExchangeRateCard: FC = () => {
   return (
     <Box component="div" className={styles.container}>
       <Box component="div" className={styles.container_aboutCurrency}>
@@ -27,4 +27,4 @@ const CurrencyCard: FC = () => {
   )
 }
 
-export default CurrencyCard
+export default ExchangeRateCard

@@ -1,6 +1,5 @@
 @import '/src/assets/mixins/mixins.scss';
 
-
 .container {
   @include flexContainer($justify: space-between, $align: center);
   border-radius: 8px;

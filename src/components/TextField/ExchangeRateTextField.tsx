@@ -3,7 +3,7 @@ import { TextField } from '@mui/material'
 
 import { theme } from '../../assets/theme/theme'
 
-const RateTextField = () => {
+const ExchangeRateTextField = () => {
   const [amount, setAmount] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,4 +42,4 @@ const RateTextField = () => {
   )
 }
 
-export default RateTextField
+export default ExchangeRateTextField

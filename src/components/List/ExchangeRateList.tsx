@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
 import { FC } from 'react'
 
-import CurrencyCard from '../Cards/CurrencyCard'
-import styles from './CurrencyList.module.scss'
+import CurrencyCard from '../Card/ExchangeRateCard'
+import styles from './ExchangeRateList.module.scss'
 
-const CurrencyList: FC = () => {
+const ExchangeRateList: FC = () => {
   const currencies = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
   return (
@@ -20,4 +20,4 @@ const CurrencyList: FC = () => {
   )
 }
 
-export default CurrencyList
+export default ExchangeRateList

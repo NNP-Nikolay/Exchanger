@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material'
 import { FC } from 'react'
 
-import RateTextField from '../TextField/RateTextField'
-import styles from './CurrencyConverter.module.scss'
+import styles from './ExchangeRateConverter.module.scss'
+import ExchangeRateTextField from '../TextField/ExchangeRateTextField'
 
-const CurrencyConverter: FC = () => {
+const ExchangeRateConverter: FC = () => {
   return (
     <Box component="div" className={styles.container}>
       <Box component="div" className={styles.container_currentRate}>
@@ -19,10 +19,10 @@ const CurrencyConverter: FC = () => {
         </Box>
       </Box>
       <Box component="div" className={styles.container_amount}>
-        <RateTextField />
+        <ExchangeRateTextField />
       </Box>
     </Box>
   )
 }
 
-export default CurrencyConverter
+export default ExchangeRateConverter
