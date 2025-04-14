@@ -2,7 +2,7 @@
 
 .container {
   @include flexContainer($justify: space-between);
-  padding: 10px 16px;
+  padding: 5px 16px;
   width: 100%;
   background: #000000;
   cursor: pointer;

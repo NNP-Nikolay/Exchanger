@@ -7,19 +7,23 @@ import Footer from '../../components/Footer/Footer'
 import { theme } from '../../assets/theme/theme'
 import ExchangeRateConverter from '../../components/Converter/ExchangeRateConverter'
 import ExchangeRateList from '../../components/List/ExchangeRateList'
-import { fetchExchangeRates } from '../../shared/api/exchangeRatesApi'
+import { fetchCurrencyData } from '../../shared/api/exchangeRatesApi'
 import { RootState } from '../../redux/store'
 import { setExchangeRates } from '../../redux/ExchangeRatesSlice'
+import Loader from '../../components/Loader/Loader'
+import { currencyToCountryCode } from '../../shared/utils/currencyToCountryCode'
 
 const Home: FC = () => {
   const dispatch = useDispatch()
-  const exchangeRates = useSelector((state: RootState) => state.exchange.exchangeRates)
+  const { exchangeRates, baseCurrency } = useSelector((state: RootState) => state.exchange)
   const [loading, setLoading] = useState<boolean>(true)
+
+  const flagCode = currencyToCountryCode['USD'] || 'un'
 
   useEffect(() => {
     const getExchangeRates = async () => {
       try {
-        const data = await fetchExchangeRates()
+        const data = await fetchCurrencyData()
         dispatch(setExchangeRates(data))
       } catch {
         console.log('Request finished with problem')
@@ -55,8 +59,8 @@ const Home: FC = () => {
           margin: '0px 32px 50px 32px',
         }}
       >
-        <ExchangeRateConverter />
-        {!loading && <ExchangeRateList exchangeRates={exchangeRates} />}
+        <ExchangeRateConverter baseCurrency={baseCurrency} flagCode={flagCode} />
+        {loading ? <Loader /> : <ExchangeRateList exchangeRates={exchangeRates} />}
       </Box>
       <Footer />
     </Box>

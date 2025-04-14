@@ -5,27 +5,46 @@ type SymbolsResponse = {
   symbols: Record<string, string>
 }
 
-export const fetchExchangeRates = async (): Promise<SymbolsResponse['symbols']> => {
-  const API_KEY = process.env.REACT_APP_EXCHANGE_RATES_API_KEY
+type RatesResponse = {
+  success: boolean
+  base: string
+  date: string
+  rates: Record<string, number>
+}
 
-  if (!API_KEY) {
-    throw new Error('API key is missing! Please check your .env file.')
-  }
+type CurrencyData = {
+  code: string
+  name: string
+  rate: number
+}
 
+const API_KEY = 'a5c4c62b93da110652c5b1df5a2e5d65'
+
+export const fetchCurrencyData = async (): Promise<CurrencyData[]> => {
   try {
-    const response = await axios.get<SymbolsResponse>('https://api.apilayer.com/fixer/symbols', {
-      headers: {
-        apikey: API_KEY,
-      },
-    })
+    const [symbolsResponse, ratesResponse] = await Promise.all([
+      axios.get<SymbolsResponse>(`http://data.fixer.io/api/symbols?access_key=${API_KEY}`),
+      axios.get<RatesResponse>(`http://data.fixer.io/api/latest?access_key=${API_KEY}`),
+    ])
 
-    if (!response.data.success || !response.data.symbols) {
-      throw new Error('Invalid response from API')
+    if (!symbolsResponse.data.success || !ratesResponse.data.success) {
+      throw new Error('Failed to load currency data')
     }
 
-    return response.data.symbols
-  } catch (error: unknown) {
-    console.log('FAILED')
-    throw new Error('Could not load currency symbols. Please try again later.')
+    const symbols = symbolsResponse.data.symbols
+    const rates = ratesResponse.data.rates
+
+    const merged: CurrencyData[] = Object.entries(symbols)
+      .filter(([code]) => rates[code] !== undefined)
+      .map(([code, name]) => ({
+        code,
+        name,
+        rate: rates[code],
+      }))
+
+    return merged
+  } catch (error) {
+    console.error('Error fetching currency data:', error)
+    throw new Error('Could not load currency data.')
   }
 }

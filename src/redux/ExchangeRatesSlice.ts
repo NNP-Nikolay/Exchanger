@@ -1,23 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface CurrencyState {
-  exchangeRates: Record<string, string>
+import type { TExchangeRates } from './types/ExchangeRatesSlice'
+
+interface ExchangeRatesState {
+  exchangeRates: TExchangeRates[]
+  baseCurrency: string
 }
 
-const initialState: CurrencyState = {
-  exchangeRates: {},
+const initialState: ExchangeRatesState = {
+  exchangeRates: [],
+  baseCurrency: 'USD',
 }
 
 const ExchangeRatesSlice = createSlice({
   name: 'exchange',
   initialState,
   reducers: {
-    setExchangeRates(state, action: PayloadAction<Record<string, string>>) {
+    setExchangeRates(state, action: PayloadAction<TExchangeRates[]>) {
       state.exchangeRates = action.payload
+    },
+    setBaseCurrency(state, action: PayloadAction<string>) {
+      state.baseCurrency = action.payload
     },
   },
 })
 
-export const { setExchangeRates } = ExchangeRatesSlice.actions
-
+export const { setExchangeRates, setBaseCurrency } = ExchangeRatesSlice.actions
 export default ExchangeRatesSlice.reducer

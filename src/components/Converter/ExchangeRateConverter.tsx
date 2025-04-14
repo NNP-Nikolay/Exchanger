@@ -3,18 +3,27 @@ import { FC } from 'react'
 
 import styles from './ExchangeRateConverter.module.scss'
 import ExchangeRateTextField from '../TextField/ExchangeRateTextField'
+interface ExchangeRateConverterProps {
+  baseCurrency: string
+  flagCode: string
+}
 
-const ExchangeRateConverter: FC = () => {
+const ExchangeRateConverter: FC<ExchangeRateConverterProps> = ({ baseCurrency, flagCode }) => {
   return (
     <Box component="div" className={styles.container}>
       <Box component="div" className={styles.container_currentRate}>
-        <img src="/images/grow-up.png" width={25} height={25} alt="img" />
+        <img
+          src={`https://flagcdn.com/48x36/${flagCode}.png`}
+          width={48}
+          height={36}
+          alt={`${baseCurrency} flag`}
+        />
         <Box component="div" className={styles.container_currentRate_currency}>
           <Typography component="p" variant="body1">
-            USD
+            {baseCurrency}
           </Typography>
           <Typography component="p" variant="body2">
-            United States Dollar
+            {baseCurrency === 'USD' ? 'United States Dollar' : baseCurrency}
           </Typography>
         </Box>
       </Box>
