@@ -1,18 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface CurrencyState {
-  exchangeRates: []
+  exchangeRates: Record<string, string>
 }
 
 const initialState: CurrencyState = {
-  exchangeRates: [],
+  exchangeRates: {},
 }
 
 const ExchangeRatesSlice = createSlice({
   name: 'exchange',
   initialState,
   reducers: {
-    setExchangeRates(state, action) {
+    setExchangeRates(state, action: PayloadAction<Record<string, string>>) {
       state.exchangeRates = action.payload
     },
   },
