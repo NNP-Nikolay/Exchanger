@@ -1,8 +1,10 @@
 import { Box, Typography } from '@mui/material'
 import { FC } from 'react'
+import { useDispatch } from 'react-redux'
 
 import styles from './ExchangeRateCard.module.scss'
 import { currencyToCountryCode } from '../../shared/utils/currencyToCountryCode'
+import { setBaseCurrency } from '../../redux/ExchangeRatesSlice'
 interface ExchangeRateCardProps {
   currency: string
   name: string
@@ -10,10 +12,16 @@ interface ExchangeRateCardProps {
 }
 
 const ExchangeRateCard: FC<ExchangeRateCardProps> = ({ currency, name, rate }) => {
+  const dispatch = useDispatch()
+
+  const handleClick = () => {
+    dispatch(setBaseCurrency(currency))
+  }
+
   const flagCode = currencyToCountryCode[currency] || 'un'
 
   return (
-    <Box component="div" className={styles.container}>
+    <Box component="div" className={styles.container} onClick={handleClick}>
       <Box component="div" className={styles.container_aboutCurrency}>
         <img
           src={`https://flagcdn.com/48x36/${flagCode}.png`}

@@ -15,10 +15,9 @@ import { currencyToCountryCode } from '../../shared/utils/currencyToCountryCode'
 
 const Home: FC = () => {
   const dispatch = useDispatch()
-  const { exchangeRates, baseCurrency } = useSelector((state: RootState) => state.exchange)
+  const { exchangeRates } = useSelector((state: RootState) => state.exchange)
+  const [baseCurrency, setBaseCurrency] = useState<string>('USD')
   const [loading, setLoading] = useState<boolean>(true)
-
-  const flagCode = currencyToCountryCode['USD'] || 'un'
 
   useEffect(() => {
     const getExchangeRates = async () => {
@@ -59,8 +58,18 @@ const Home: FC = () => {
           margin: '0px 32px 50px 32px',
         }}
       >
-        <ExchangeRateConverter baseCurrency={baseCurrency} flagCode={flagCode} />
-        {loading ? <Loader /> : <ExchangeRateList exchangeRates={exchangeRates} />}
+        <ExchangeRateConverter
+          flagCode={currencyToCountryCode[baseCurrency] || 'un'}
+          baseCurrency={baseCurrency}
+        />
+        {loading ? (
+          <Loader />
+        ) : (
+          <ExchangeRateList
+            exchangeRates={exchangeRates}
+            onBaseCurrencyChange={(currency) => setBaseCurrency(currency)}
+          />
+        )}
       </Box>
       <Footer />
     </Box>

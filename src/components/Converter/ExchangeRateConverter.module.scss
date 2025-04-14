@@ -6,7 +6,11 @@
   width: 100%;
   margin-bottom: 16px;
   padding: 16px;
-  background: #000000;
+  border: 1px solid transparent;
+
+  background-image: linear-gradient(#000000, #000000), linear-gradient(90deg, #FF9F63, #8B3C1F);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 
   &_currentRate {
     @include flexContainer();
