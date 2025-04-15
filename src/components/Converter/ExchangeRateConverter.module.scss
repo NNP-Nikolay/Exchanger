@@ -16,4 +16,9 @@
     @include flexContainer();
     gap: 16px;
   }
+
+  &_amount {
+    @include flexContainer();
+    gap: 16px;
+  }
 }

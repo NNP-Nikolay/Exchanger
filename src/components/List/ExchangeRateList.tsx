@@ -7,13 +7,24 @@ import styles from './ExchangeRateList.module.scss'
 interface ExchangeRateListProps {
   exchangeRates: TExchangeRates[]
   onBaseCurrencyChange: (currency: string) => void
+  searchValue: string
 }
 
-const ExchangeRateList: FC<ExchangeRateListProps> = ({ exchangeRates, onBaseCurrencyChange }) => {
+const ExchangeRateList: FC<ExchangeRateListProps> = ({
+  exchangeRates,
+  onBaseCurrencyChange,
+  searchValue,
+}) => {
+  const filteredRates = exchangeRates.filter(
+    (rate) =>
+      rate.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+      rate.code.toLowerCase().includes(searchValue.toLowerCase()),
+  )
+
   return (
     <Box component="section" className={styles.container}>
       <Box component="ul" className={styles.container_list}>
-        {exchangeRates.map((rateItem) => (
+        {filteredRates.map((rateItem) => (
           <Box
             component="li"
             key={rateItem.code}

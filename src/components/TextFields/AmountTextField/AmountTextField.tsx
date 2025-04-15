@@ -1,20 +1,17 @@
 import React, { FC } from 'react'
-import { TextField, Button, Box, Typography } from '@mui/material'
+import { TextField, Box } from '@mui/material'
 
-import { theme } from '../../assets/theme/theme'
-import styles from './ExchangeRateTextField.module.scss'
+import { theme } from '../../../assets/theme/theme'
+import styles from './AmountTextField.module.scss'
+import GradientButton from '../../Button/GradientButton'
 
-interface ExchangeRateTextFieldProps {
+interface AmountTextFieldProps {
   amount: string
   onAmountChange: (value: string) => void
   onUpdateRates: () => void
 }
 
-const ExchangeRateTextField: FC<ExchangeRateTextFieldProps> = ({
-  amount,
-  onAmountChange,
-  onUpdateRates,
-}) => {
+const AmountTextField: FC<AmountTextFieldProps> = ({ amount, onAmountChange, onUpdateRates }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value
     value = value.replace(',', '.')
@@ -60,21 +57,14 @@ const ExchangeRateTextField: FC<ExchangeRateTextFieldProps> = ({
           borderRadius: '8px',
         }}
       />
-
-      <Button
+      <GradientButton
         onClick={handleButtonClick}
-        className={styles.container_confirmButton}
-        sx={{
-          maxWidth: '120px',
-          maxHeight: '43px',
-        }}
-      >
-        <Typography component="p" variant="body1" sx={{ color: theme.palette.accent.black }}>
-          Confirm
-        </Typography>
-      </Button>
+        text={'Confirm'}
+        maxHeight={'43'}
+        maxWidth={'120'}
+      />
     </Box>
   )
 }
 
-export default ExchangeRateTextField
+export default AmountTextField

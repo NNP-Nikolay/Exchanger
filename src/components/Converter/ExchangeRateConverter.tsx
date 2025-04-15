@@ -3,17 +3,25 @@ import { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './ExchangeRateConverter.module.scss'
-import ExchangeRateTextField from '../TextField/ExchangeRateTextField'
 import { RootState } from '../../redux/store'
 import { setAmount, setUpdateRates } from '../../redux/ExchangeRatesSlice'
 import { currencyFullName } from '../../shared/utils/currencyFullName'
+import AmountTextField from '../TextFields/AmountTextField/AmountTextField'
+import SearchTextField from '../TextFields/SearchTextField/SearchTextField'
 
 interface ExchangeRateConverterProps {
   baseCurrency: string
   flagCode: string
+  searchValue: string
+  setSearchValue: (value: string) => void
 }
 
-const ExchangeRateConverter: FC<ExchangeRateConverterProps> = ({ flagCode, baseCurrency }) => {
+const ExchangeRateConverter: FC<ExchangeRateConverterProps> = ({
+  flagCode,
+  baseCurrency,
+  searchValue,
+  setSearchValue,
+}) => {
   const dispatch = useDispatch()
   const { amount } = useSelector((state: RootState) => state.exchange)
 
@@ -44,7 +52,8 @@ const ExchangeRateConverter: FC<ExchangeRateConverterProps> = ({ flagCode, baseC
         </Box>
       </Box>
       <Box component="div" className={styles.container_amount}>
-        <ExchangeRateTextField
+        <SearchTextField value={searchValue} onChange={setSearchValue} placeholder="Search..." />
+        <AmountTextField
           amount={amount}
           onAmountChange={handleAmountChange}
           onUpdateRates={handleUpdateRates}

@@ -1,0 +1,13 @@
+@import '../../assets/mixins/mixins.scss';
+
+.confirmButton {
+  @include flexContainer($justify: center, $align: center);
+  border-radius: 6px;
+  padding: 10px 16px;
+  background: linear-gradient(90deg, #FF9F63, #8B3C1F);
+  cursor: pointer;  
+
+  &:focus {
+    outline: none;
+  }
+}

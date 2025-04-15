@@ -18,6 +18,7 @@ const Home: FC = () => {
   const { exchangeRates } = useSelector((state: RootState) => state.exchange)
   const [baseCurrency, setBaseCurrency] = useState<string>('USD')
   const [loading, setLoading] = useState<boolean>(true)
+  const [searchValue, setSearchValue] = useState<string>('')
 
   useEffect(() => {
     const getExchangeRates = async () => {
@@ -61,6 +62,8 @@ const Home: FC = () => {
         <ExchangeRateConverter
           flagCode={currencyToCountryCode[baseCurrency] || 'un'}
           baseCurrency={baseCurrency}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
         />
         {loading ? (
           <Loader />
@@ -68,6 +71,7 @@ const Home: FC = () => {
           <ExchangeRateList
             exchangeRates={exchangeRates}
             onBaseCurrencyChange={(currency) => setBaseCurrency(currency)}
+            searchValue={searchValue}
           />
         )}
       </Box>

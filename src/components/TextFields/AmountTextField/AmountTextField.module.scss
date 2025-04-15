@@ -1,0 +1,6 @@
+@import '../../../assets/mixins/mixins.scss';
+
+.container {
+  @include flexContainer($justify: center, $align: center);
+  gap: 16px;
+}
