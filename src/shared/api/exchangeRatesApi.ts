@@ -18,10 +18,14 @@ type CurrencyData = {
   rate: number
 }
 
-const API_KEY = 'a5c4c62b93da110652c5b1df5a2e5d65'
+const API_KEY = process.env.REACT_APP_EXCHANGE_RATES_API_KEY
 
 export const fetchCurrencyData = async (): Promise<CurrencyData[]> => {
   try {
+    if (!API_KEY) {
+      throw new Error('API key is missing')
+    }
+
     const [symbolsResponse, ratesResponse] = await Promise.all([
       axios.get<SymbolsResponse>(`http://data.fixer.io/api/symbols?access_key=${API_KEY}`),
       axios.get<RatesResponse>(`http://data.fixer.io/api/latest?access_key=${API_KEY}`),
