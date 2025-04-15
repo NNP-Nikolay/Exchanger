@@ -3,28 +3,18 @@ import { TextField, Box } from '@mui/material'
 
 import { theme } from '../../../assets/theme/theme'
 import styles from './AmountTextField.module.scss'
-import GradientButton from '../../Button/GradientButton'
 
 interface AmountTextFieldProps {
   amount: string
   onAmountChange: (value: string) => void
-  onUpdateRates: () => void
 }
 
-const AmountTextField: FC<AmountTextFieldProps> = ({ amount, onAmountChange, onUpdateRates }) => {
+const AmountTextField: FC<AmountTextFieldProps> = ({ amount, onAmountChange }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value
     value = value.replace(',', '.')
     value = value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1')
     onAmountChange(value)
-  }
-
-  const handleButtonClick = () => {
-    const numericValue = parseFloat(amount)
-    if (amount === '' || isNaN(numericValue)) {
-      return
-    }
-    onUpdateRates()
   }
 
   return (
@@ -56,12 +46,6 @@ const AmountTextField: FC<AmountTextFieldProps> = ({ amount, onAmountChange, onU
           },
           borderRadius: '8px',
         }}
-      />
-      <GradientButton
-        onClick={handleButtonClick}
-        text={'Confirm'}
-        maxHeight={'43'}
-        maxWidth={'120'}
       />
     </Box>
   )

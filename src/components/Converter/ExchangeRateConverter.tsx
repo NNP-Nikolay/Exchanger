@@ -8,6 +8,7 @@ import { setAmount, setUpdateRates } from '../../redux/ExchangeRatesSlice'
 import { currencyFullName } from '../../shared/utils/currencyFullName'
 import AmountTextField from '../TextFields/AmountTextField/AmountTextField'
 import SearchTextField from '../TextFields/SearchTextField/SearchTextField'
+import GradientButton from '../Button/GradientButton' // Додали імпорт кнопки
 
 interface ExchangeRateConverterProps {
   baseCurrency: string
@@ -33,6 +34,14 @@ const ExchangeRateConverter: FC<ExchangeRateConverterProps> = ({
     dispatch(setUpdateRates())
   }
 
+  const handleButtonClick = () => {
+    const numericValue = parseFloat(amount)
+    if (amount === '' || isNaN(numericValue)) {
+      return
+    }
+    handleUpdateRates()
+  }
+
   return (
     <Box component="div" className={styles.container}>
       <Box component="div" className={styles.container_currentRate}>
@@ -53,10 +62,12 @@ const ExchangeRateConverter: FC<ExchangeRateConverterProps> = ({
       </Box>
       <Box component="div" className={styles.container_amount}>
         <SearchTextField value={searchValue} onChange={setSearchValue} placeholder="Search..." />
-        <AmountTextField
-          amount={amount}
-          onAmountChange={handleAmountChange}
-          onUpdateRates={handleUpdateRates}
+        <AmountTextField amount={amount} onAmountChange={handleAmountChange} />
+        <GradientButton
+          onClick={handleButtonClick}
+          text={'Confirm'}
+          maxHeight={'43'}
+          maxWidth={'120'}
         />
       </Box>
     </Box>

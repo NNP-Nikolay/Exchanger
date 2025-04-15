@@ -7,12 +7,44 @@
   background: #000000;
   cursor: pointer;
 
+  @media (max-width: 650px) {
+    padding: 5px 10px;
+  }
+
+  @media (max-width: 650px) {
+    display: grid;
+    align-items: center;
+    gap: 5px;
+  }
+
   &_aboutCurrency {
     @include flexContainer($align: center);
-    gap: 16px;
+    gap: 8px;
+    
+    @media (max-width: 650px) {
+      @include flexContainer($align: center);
+    }
 
-    &_infoText {
+    &_info {
       @include flexContainer($direction: column);
+
+      @media (max-width: 650px) {
+        @include flexContainer();
+        gap: 8px;
+      }
+
+      &_text {
+        @media (max-width: 650px) {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &_flagIcon {
+      @media (max-width: 650px) {
+        width: 20px;
+        height: 14px;
+      }
     }
   }
 }

@@ -28,12 +28,13 @@ const ExchangeRateCard: FC<ExchangeRateCardProps> = ({ currency, name, rate }) =
           width={48}
           height={36}
           alt={currency}
+          className={styles.container_aboutCurrency_flagIcon}
         />
-        <Box component="div" className={styles.container_aboutCurrency_infoText}>
-          <Typography component="b" variant="body1">
+        <Box component="div" className={styles.container_aboutCurrency_info}>
+          <Typography component="b" variant="body1" className={styles.container_info_text}>
             {currency}
           </Typography>
-          <Typography component="b" variant="body1">
+          <Typography component="b" variant="body1" className={styles.container_info_text}>
             {name}
           </Typography>
         </Box>

@@ -1,0 +1,20 @@
+@import '../../assets/mixins/mixins.scss';
+
+.header {
+  @include flexContainer($justify: space-between, $align: center);
+  position: relative;
+  margin-bottom: 50px;
+  padding: 32px 32px 0px 32px;
+
+  @media (max-width: 1250px) {
+    @include flexContainer($justify: center, $align: center);
+    margin-bottom: 16px;
+  }
+
+  &_logo {
+    border-radius: 10px;
+    border: 1px solid white;
+    opacity: 0.6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  }
+}

@@ -12,6 +12,16 @@
   background-origin: border-box;
   background-clip: padding-box, border-box;
 
+  @media (max-width: 900px) {
+    @include flexContainer($justify: center, $align: center, $wrap: wrap);
+    gap: 32px;
+  }
+
+  @media (max-width: 650px) {
+    @include flexContainer($direction: column, $justify: center, $align: center);
+    gap: 16px;
+  }
+
   &_currentRate {
     @include flexContainer();
     gap: 16px;
@@ -20,5 +30,9 @@
   &_amount {
     @include flexContainer();
     gap: 16px;
+
+    @media (max-width: 650px) {
+      @include flexContainer($direction: column);
+    }
   }
 }
